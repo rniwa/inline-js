@@ -1,13 +1,5 @@
 #!/usr/local/bin/node
 
-function scriptExecutionEnvironment(window) {
-    return function (script) {
-        console.log('Executing: ', script);
-        console.log(window.document.body.write);
-        return eval(script);
-    }
-}
-
 function inlineJSMain() {
     if (process.argv.length <= 2) {
         console.error("Interactive mode hasn't been implemented");
@@ -25,9 +17,6 @@ function inlineJSMain() {
         done: function (errors, window) {
             // FIXME: Deal with errors.
             var scripts = window.document.getElementsByTagName('script');
-
-            // FIXME: There must be a better way of doing this.
-            var evalInWorld = scriptExecutionEnvironment(window);
 
             for (var i = 0; i < scripts.length; i++) {
                 var script = scripts[i];
